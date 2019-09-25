@@ -52,7 +52,6 @@ COPY --chown=1000:0 {{ '%s/' % artifacts_dir }} {{ artifacts_dir }}
 WORKDIR /usr/share/elasticsearch
 
 # Bust cache for wgets
-ENV BUST_CACHE {{ bust_cache }}
 
 # Download and extract defined ES version.
 RUN curl -fsSL {{ elastic_artifacts_url }}/{{ tarball }} | \
@@ -71,6 +70,8 @@ RUN set -ex && for esdirs in config data logs; do \
 #RUN chmod +x /usr/share/elasticsearch/plugins/opendistro_security/tools/install_demo_configuration.sh
 
 COPY --chown=1000:0 elasticsearch.yml log4j2.properties config/
+
+ENV BUST_CACHE {{ bust_cache }}
 
 COPY --chown=1000:0 performance-analyzer-rca-1.0.0-SNAPSHOT.zip config/ 
 
