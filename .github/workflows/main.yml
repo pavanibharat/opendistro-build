@@ -21,5 +21,18 @@ jobs:
       run: |
         sleep 5m
         curl -XGET --insecure https://localhost:9200 -u admin:admin
+        
+        curl -X PUT "https://localhost:9200/test_index/_mappings" -u admin:admin --insecure -H 'Content-Type: application/json' -d'
+        {
+          "properties" : {
+             "@timestamp" : {
+                "type" : "date",
+                "format" : "epoch_millis"
+                },
+             "test_field" : {
+                "type" : "text"
+                }
+              }
+            }'
           
         
