@@ -16,7 +16,7 @@ jobs:
         token: ${{ secrets.GitHub_PAT }}    
     - name: Run Docker
       run: |
-         docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/elasticsearch-test-ubuntu:1.3.0
+         nohup docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/elasticsearch-test-ubuntu:1.3.0 &
     - name: Run ES
       run: |
         curl -XGET --insecure https://localhost:9200 -u admin:admin
