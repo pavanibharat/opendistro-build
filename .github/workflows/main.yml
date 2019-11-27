@@ -14,8 +14,9 @@ jobs:
       with:
         repository: opendistro-for-elasticsearch/opendistro-infra
         ref: master
-        token: ${{ secrets.GitHub_PAT }}
+        token: ${{ secrets.GitHub_PAT }}    
     - name: Run a multi-line script
       run: |
         echo `pwd`
+        cd ..
         ls -ltr
