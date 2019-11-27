@@ -19,10 +19,10 @@ jobs:
          nohup docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/elasticsearch-test-ubuntu:1.3.0 &
     - name: Run ES
       run: |
-        sleep 5m
+        sleep 4m
         curl -XGET --insecure --fail https://localhost:9200 -u admin:admin
         
-        curl -X --fail PUT "https://localhost:9200/test_index/_mappings" -u admin:admin --insecure -H 'Content-Type: application/json' -d'
+        curl -X PUT --fail "https://localhost:9200/test_index/_mappings" -u admin:admin --insecure -H 'Content-Type: application/json' -d'
         {
           "properties" : {
              "@timestamp" : {
