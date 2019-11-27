@@ -19,7 +19,7 @@ jobs:
          nohup docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/elasticsearch-test-ubuntu:1.3.0 &
     - name: Run ES
       run: |
-        sleep 50
+        sleep 5m
         curl -XGET --insecure https://localhost:9200 -u admin:admin
           
         
