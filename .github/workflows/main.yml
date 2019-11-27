@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - git-actions
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        repository: opendistro-for-elasticsearch/opendistro-infra
+        ref: master
+    - name: Run a multi-line script
+      run: |
+        echo `pwd`
