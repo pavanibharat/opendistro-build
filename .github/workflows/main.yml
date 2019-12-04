@@ -21,6 +21,9 @@ jobs:
       run: |
         cd ..
         ls -ltr
+        cd opendistro-infra
+        git branch
+        ls -ltr
         #sleep 4m
         #curl -XGET --insecure --fail https://localhost:9200 -u admin:admin
         
