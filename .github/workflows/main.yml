@@ -29,6 +29,7 @@ jobs:
         sleep 10
         
         sudo systemctl status elasticsearch.service
+        sudo netstat -natp
         
     - name: Run Curl commands
       run: |
