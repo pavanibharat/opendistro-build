@@ -28,12 +28,12 @@ jobs:
         
         sleep 10
         
-        systemctl status elasticsearch.service
+        sudo systemctl status elasticsearch.service
         
     - name: Run Curl commands
       run: |
         
-        netstat -natp
+        sudo netstat -natp
         
         #curl -XGET https://localhost:9200 -u admin:admin --insecure
         
