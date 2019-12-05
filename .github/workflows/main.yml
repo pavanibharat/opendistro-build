@@ -22,7 +22,9 @@ jobs:
         sudo dpkg -i elasticsearch-oss-7.2.1-amd64.deb
         
         sudo apt-get update
-        sudo /etc/init.d/elasticsearch start
+        sudo apt install -y opendistroforelasticsearch
+        sudo systemctl start elasticsearch.service
+        sleep 5
         
         sudo netstat -natp
         
