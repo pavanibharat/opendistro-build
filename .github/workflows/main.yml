@@ -22,3 +22,8 @@ jobs:
         sudo apt-get update
         sudo apt install opendistroforelasticsearch
         
+    - name: Run ES
+      run: |
+        sudo systemctl start elasticsearch.service
+     
+        
