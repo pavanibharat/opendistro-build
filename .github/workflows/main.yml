@@ -24,7 +24,7 @@ jobs:
         
     - name: Run ES
       run: |
-        
+        sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
         sudo echo "network.host: 127.0.0.1" >> /etc/elasticsearch/elasticsearch.yml
         sudo systemctl start elasticsearch.service
         
