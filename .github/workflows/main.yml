@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: Create Docker Conrainer
-    runs-on: [ubuntu-latest]
+    runs-on: [ubuntu-16.04]
 
     steps:
     - name: Run Debian Distribution
@@ -35,5 +35,7 @@ jobs:
         sudo ls -ltr /etc/elasticsearch/
         
         sudo cat /etc/elasticsearch/elasticsearch.yml
+        
+        curl -XGET https://localhost:9200 -u admin:admin --insecure
      
         
