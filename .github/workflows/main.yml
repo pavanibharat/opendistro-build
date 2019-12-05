@@ -26,6 +26,8 @@ jobs:
         
     - name: Run ES
       run: |
+        
+        sudo echo "network.host: 127.0.0.1" >> /etc/elasticsearch/elasticsearch.yml
         sudo systemctl start elasticsearch.service
         
         sleep 10
@@ -35,6 +37,6 @@ jobs:
         
         sudo cat /etc/elasticsearch/elasticsearch.yml
         
-        curl -XGET https://localhost:9200 -u admin:admin --insecure
+        curl -XGET https://127.0.0.1:9200 -u admin:admin --insecure
      
         
