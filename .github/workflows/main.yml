@@ -28,13 +28,15 @@ jobs:
         
         sudo netstat -natp
         
+        curl -XGET https://localhost:9200 -u admin:admin --insecure
+        
     - name: Run ES
       run: |
         
         sleep 10
         
-        sudo cat /etc/elasticsearch/elasticsearch.yml
+        #sudo cat /etc/elasticsearch/elasticsearch.yml
         
-        curl -XGET https://127.0.0.1:9200 -u admin:admin --insecure
+        
      
         
