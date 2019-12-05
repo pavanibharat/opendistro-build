@@ -30,6 +30,10 @@ jobs:
         
         systemctl status elasticsearch.service
         
+    - name: Run Curl commands
+      run: |
+        
+        
         curl -XGET https://localhost:9200 -u admin:admin --insecure
         
         curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
