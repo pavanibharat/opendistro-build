@@ -29,17 +29,8 @@ jobs:
         sleep 10
         
         sudo systemctl status elasticsearch.service
-        sudo netstat -natp
+        sudo ls -ltr /etc/elasticsearch/
         
-    - name: Run Curl commands
-      run: |
-        
-        sudo netstat -natp
-        
-        #curl -XGET https://localhost:9200 -u admin:admin --insecure
-        
-        #curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
-        
-        #curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
+        sudo cat /etc/elasticsearch/elasticsearch.yml
      
         
