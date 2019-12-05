@@ -7,16 +7,12 @@ on:
 jobs:
   build:
     name: Create Docker Conrainer
-    runs-on: macOS-latest
+    runs-on: [ubuntu-latest]
 
     steps:
     - name: Run Debian Distribution
       run: |
-        sudo apt-get update
-        
-        sudo apt-get install software-properties-common
-        
-        sudo apt-get update
+
         wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
         echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
         
