@@ -21,7 +21,7 @@ jobs:
         sudo dpkg -i elasticsearch-oss-7.2.1-amd64.deb
         
         sudo apt-get update
-        apt install -y apt-transport-https
+        sudo apt install -y apt-transport-https
         sudo apt install -y opendistroforelasticsearch
         
     - name: Run ES
