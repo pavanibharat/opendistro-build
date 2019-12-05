@@ -20,18 +20,14 @@ jobs:
         sudo dpkg -i elasticsearch-oss-7.2.1-amd64.deb
         
         sudo apt-get update
-        sudo apt install -y opendistroforelasticsearch
+        sudo /etc/init.d/elasticsearch start
         
     - name: Run ES
       run: |
-        chmod 777 /etc/elasticsearch/elasticsearch.yml
-        sudo echo "network.host: 127.0.0.1" >> /etc/elasticsearch/elasticsearch.yml
-        sudo systemctl start elasticsearch.service
         
         sleep 10
         
-        sudo systemctl status elasticsearch.service
-        sudo ls -ltr /etc/elasticsearch/
+        sudo ls -ltr /etc/elasticsearch/logs/
         
         sudo cat /etc/elasticsearch/elasticsearch.yml
         
