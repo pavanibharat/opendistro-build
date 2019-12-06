@@ -34,7 +34,7 @@ jobs:
         
         sudo netstat -natp
         
-        #curl -XGET https://localhost:9200 -u admin:admin --insecure
+        curl -XGET https://localhost:9200 -u admin:admin --insecure
         
     - name: Run ES
       run: |
