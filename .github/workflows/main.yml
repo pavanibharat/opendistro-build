@@ -31,10 +31,10 @@ jobs:
         sudo apt install -y opendistroforelasticsearch
         sudo /etc/init.d/elasticsearch start
         sleep 5
-        
+        sudo ls -ltr /var/log/elasticsearch/
         sudo netstat -natp
         
-        curl -XGET https://localhost:9200 -u admin:admin --insecure
+        #curl -XGET https://localhost:9200 -u admin:admin --insecure
         
     - name: Run ES
       run: |
