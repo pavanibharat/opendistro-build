@@ -46,6 +46,17 @@ jobs:
         curl -XGET https://localhost:9200/_cat/nodes?v -u admin:admin --insecure
         curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
         
+    - name: Run ES Tests
+      run: |
+        sudo pip install pytest
+        sudo pip install requests
+        cd ..
+        ls -ltr
+        cd odfe-test
+        ls -ltr
+        cd odfe-test
+        pytest
+        
         
         
      
