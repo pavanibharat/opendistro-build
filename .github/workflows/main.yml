@@ -8,17 +8,19 @@ jobs:
   build:
     name: Create Docker Conrainer
     runs-on: [ubuntu-16.04]
-    container:
-      image: opendistroforelasticsearch/base-ubuntu
+    #container:
+      #image: opendistroforelasticsearch/base-ubuntu
 
     steps:
     - name: Run Debian Distribution
       run: |
-        sudo add-apt-repository -y ppa:openjdk-r/ppa
-        sudo apt update
-        sudo apt install -y openjdk-11-jdk
+        sudo sysctl -w vm.max_map_count=262144
         
-        sudo sudo apt install -y net-tools
+        #sudo add-apt-repository -y ppa:openjdk-r/ppa
+        #sudo apt update
+        #sudo apt install -y openjdk-11-jdk
+        
+        #sudo sudo apt install -y net-tools
 
         wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
         echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a   /etc/apt/sources.list.d/opendistroforelasticsearch.list
