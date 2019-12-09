@@ -6,7 +6,7 @@ on:
       - sngri-actions-test
 jobs:
   build:
-    name: Create Docker Conrainer
+    name: Run and Test ODFE-Debian
     runs-on: [ubuntu-16.04]
 
     steps:
