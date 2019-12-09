@@ -15,6 +15,9 @@ jobs:
         repository: rishabh6788/odfe-test
         ref: master
         token: ${{ secrets.GitHub_PAT }}
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
     - name: Run Debian Distribution
       run: |
         sudo sysctl -w vm.max_map_count=262144
@@ -50,8 +53,6 @@ jobs:
       run: |
         sudo pip3 install pytest
         sudo pip3 install requests
-        sudo pip3 install random
-        sudo pip3 install string
         cd ..
         ls -ltr
         cd odfe-test
