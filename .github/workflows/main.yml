@@ -15,6 +15,9 @@ jobs:
         repository: rishabh6788/odfe-test
         ref: master
         token: ${{ secrets.GitHub_PAT }}
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '3.7.5'
     - name: Run Debian Distribution
       run: |
         sudo sysctl -w vm.max_map_count=262144
