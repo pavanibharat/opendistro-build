@@ -50,6 +50,8 @@ jobs:
       run: |
         sudo pip3 install pytest
         sudo pip3 install requests
+        sudo pip3 install random
+        sudo pip3 install string
         cd ..
         ls -ltr
         cd odfe-test
