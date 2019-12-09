@@ -5,7 +5,7 @@ on:
     branches: 
       - sngri-actions-test
 jobs:
-  build:
+  Debian-Build-Test:
     name: Run and Test ODFE-Debian
     runs-on: [ubuntu-16.04]
 
@@ -56,8 +56,28 @@ jobs:
         ls -ltr
         cd odfe-test
         pytest
-        
-        
+   
+  RPM-Build-Test:
+    needs: [Debian-Build-Test]
+    name: Run and Test RPM Distribution
+    runs-on: [linux]
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          repository: rishabh6788/odfe-test
+          ref: master
+          token: ${{ secrets.GitHub_PAT }}
+      - name: Run RPM Distribution
+        run: |
+          sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
+          
+          sudo yum install -y java-11-openjdk-devel
+          sudo yum list opendistroforelasticsearch --showduplicates
+          sudo yum install -y opendistroforelasticsearch-1.2.1
+          sudo systemctl start elasticsearch.service
+          
+          sleep 25
+          sudo cat /var/log/elasticsearch/elasticsearch.log
         
      
         
