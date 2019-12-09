@@ -87,5 +87,31 @@ jobs:
           sudo /usr/bin/pip3 install pytest
           sudo /usr/bin/pip3 install requests
           pytest
+          
+  Docker-Build-Test:
+    needs: [Debian-Build-Test, RPM-Build-Test]
+    name: Run and Test ODFE Docker Image
+    runs-on: [ubuntu-16.04]
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          repository: rishabh6788/odfe-test
+          ref: master
+          token: ${{ secrets.GitHub_PAT }}
+      - name: Run Docker Image
+        run: |
+          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.2.1
+      - name: Run ES Tests
+        run: |
+          sleep 3m
+          tail -10 /var/log/elasticsearch/elasticsearch.log
+          cd ..
+          cd odfe-test
+          ls -ltr
+          cd odfe-test
+          sudo pip3 install pytest
+          sudo pip3 install requests
+          pytest
+          
      
         
