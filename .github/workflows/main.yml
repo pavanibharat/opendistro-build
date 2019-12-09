@@ -78,5 +78,14 @@ jobs:
           sleep 25
           sudo cat /var/log/elasticsearch/elasticsearch.log
         
+      - name : Run ES Tests
+        run: |
+          cd ..
+          cd odfe-test
+          ls -ltr
+          cd odfe-test
+          sudo pip3 install pytest
+          sudo pip3 install requests
+          pytest
      
         
