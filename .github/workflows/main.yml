@@ -58,7 +58,7 @@ jobs:
     name: Run and Test RPM Distribution
     runs-on: [ubuntu-16.04]
     container:
-      image: opendistroforelasticsearch/base-centos
+      image: mayhem6788/centos-image:v1
     steps:
       - uses: actions/checkout@v1
         with:
@@ -67,9 +67,6 @@ jobs:
           token: ${{ secrets.GitHub_PAT }}
       - name: Run RPM Distribution
         run: |
-          sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
-          sudo yum -y update
-          sudo yum install -y python36u python36u-libs python36u-devel python36u-pip
           sudo yum install -y initscripts
           sudo curl https://d3g5vo6xdbdb9a.cloudfront.net/yum/opendistroforelasticsearch-artifacts.repo -o /etc/yum.repos.d/opendistroforelasticsearch-artifacts.repo
           
@@ -87,8 +84,8 @@ jobs:
           cd odfe-test
           ls -ltr
           cd odfe-test
-          sudo pip install pytest
-          sudo pip install requests
+          sudo /usr/bin/pip3 install pytest
+          sudo /usr/bin/pip3 install requests
           pytest
      
         
