@@ -17,7 +17,7 @@ jobs:
         token: ${{ secrets.GitHub_PAT }}
     - uses: actions/setup-python@v1
       with:
-        python-version: '3.x'
+        python-version: '3.7.5'
     - name: Run Debian Distribution
       run: |
         sudo sysctl -w vm.max_map_count=262144
@@ -51,6 +51,7 @@ jobs:
         
     - name: Run ES Tests
       run: |
+        python --version
         sudo pip3 install pytest
         sudo pip3 install requests
         cd ..
