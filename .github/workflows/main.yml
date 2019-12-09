@@ -53,7 +53,7 @@ jobs:
         ls -ltr
         cd odfe-test
         sudo pip3 install virtualenv
-        virtualenv -p /usr/bin/python3.7 runtime_env
+        virtualenv --python=python3.7.5 runtime_env
         source runtime_env/bin/activate
         sudo pip3 install pytest
         sudo pip3 install requests
