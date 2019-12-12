@@ -30,6 +30,9 @@ jobs:
           cd opendistroforelasticsearch-$odfe_version
           ls -ltr
           
+          ./opendistro-tar-install.sh
+          sleep 30
+          sudo cat /var/log/elasticsearch/elasticsearch.log
           
      
         
