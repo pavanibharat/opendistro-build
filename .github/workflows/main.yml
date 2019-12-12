@@ -45,5 +45,7 @@ jobs:
           sleep 30
           sudo cat /var/log/elasticsearch/elasticsearch.log
           
+          curl -XGET https://localhost:9200 -u admin:admin --insecure
+          
      
         
