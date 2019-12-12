@@ -19,6 +19,10 @@ jobs:
           aws-region: us-east-1
       - name: Run Tar
         run: |
+          sudo add-apt-repository ppa:openjdk-r/ppa
+          sudo apt update -y
+          sudo apt install openjdk-11-jdk
+          
           cd elasticsearch/linux_distributions
           odfe_version=`../bin/version-info --od`
           echo $odfe_version
@@ -30,7 +34,8 @@ jobs:
           cd opendistroforelasticsearch-$odfe_version
           ls -ltr
           
-          ./opendistro-tar-install.sh
+          ./opendistro-tar-install.sh -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node
+
           sleep 30
           sudo cat /var/log/elasticsearch/elasticsearch.log
           
