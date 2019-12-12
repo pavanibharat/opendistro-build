@@ -50,7 +50,7 @@ jobs:
           
       - name: Run Curl Commands
         run: |
-          cd $home/runner
+          cd /home/runner/work
           ls -ltr
           #echo "Sleeping"
           #sleep 1m
