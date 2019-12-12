@@ -3,7 +3,7 @@ name: Process Debian Artifacts
 on:
   push:
     branches:
-      - master
+      - github-demo-branch
 jobs:
   build-es-artifacts:
     name: Build ES Artifacts

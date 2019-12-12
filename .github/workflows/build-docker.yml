@@ -3,7 +3,7 @@ name: Build ODFE Docker Image and Upload
 on:
   push:
     branches:
-      - master
+      - github-demo-branch
 jobs:
   build-es-docker:
     name: Build ES Dcoker Image
