@@ -50,7 +50,7 @@ jobs:
           
       - name: Run Curl Commands
         run: |
-          cd /home/runner/work
+          cd /home/runner/work/opendistro-build/
           ls -ltr
           #echo "Sleeping"
           #sleep 1m
