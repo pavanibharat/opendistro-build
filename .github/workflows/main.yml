@@ -26,6 +26,9 @@ jobs:
     
           aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-$odfe_version.tar.gz .
           ls -ltr
+          tar -zxf opendistroforelasticsearch-$odfe_version.tar.gz
+          cd opendistroforelasticsearch-$odfe_version
+          ls -ltr
           
           
      
