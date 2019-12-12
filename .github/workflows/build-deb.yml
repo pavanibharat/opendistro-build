@@ -155,7 +155,7 @@ jobs:
           sudo pip3 install requests
           pytest
 
-  test-alerting-artifacts:
+  test-alerting-plugin:
     needs: [sign-deb-artifacts]
     runs-on: [ubuntu-16.04]
     steps:
@@ -199,3 +199,10 @@ jobs:
           sudo pip3 install pytest
           sudo pip3 install requests
           pytest
+          
+  test-security-plugin:
+    needs: [sign-deb-artifacts]
+    runs-on: [ubuntu-16.04]
+    steps:
+      - name: Run Security Plugin Tests
+        run: echo "Security Tests to be run"
