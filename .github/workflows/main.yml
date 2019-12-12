@@ -16,8 +16,12 @@ jobs:
           cd elasticsearch/linux_distributions
           odfe_version=`../bin/version-info --od`
           echo $odfe_version
-          
+          cd $home
+    
           curl https://d3g5vo6xdbdb9a.cloudfront.net/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-$odfe_version-.tar.gz -o opendistroforelasticsearch-$odfe_version.tar.gz
+          ls -ltr
+          tar -zxvf opendistroforelasticsearch-$odfe_version.tar.gz
+          cd opendistroforelasticsearch-$odfe_version
           ls -ltr
           
           
