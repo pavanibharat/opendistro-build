@@ -11,6 +11,11 @@ jobs:
     runs-on: [ubuntu-16.04]
     steps:
       - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '11.0.x'
+          java-package: jdk
+          architecture: x64
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -19,9 +24,10 @@ jobs:
           aws-region: us-east-1
       - name: Run Tar
         run: |
-          sudo add-apt-repository ppa:openjdk-r/ppa
-          sudo apt update -y
-          sudo apt install openjdk-11-jdk
+          #sudo add-apt-repository ppa:openjdk-r/ppa
+          #sudo apt update -y
+          #sudo apt install openjdk-11-jdk
+          java -version
           
           cd elasticsearch/linux_distributions
           odfe_version=`../bin/version-info --od`
