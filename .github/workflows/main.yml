@@ -40,21 +40,21 @@ jobs:
           echo $odfe_version
           cd $home
     
-          #aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-$odfe_version.tar.gz .
-          #ls -ltr
-          #tar -zxf opendistroforelasticsearch-$odfe_version.tar.gz
-          #cd opendistroforelasticsearch-$odfe_version
-          #ls -ltr
+          aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-$odfe_version.tar.gz .
+          ls -ltr
+          tar -zxf opendistroforelasticsearch-$odfe_version.tar.gz
+          cd opendistroforelasticsearch-$odfe_version
+          ls -ltr
           
-          #nohup ./opendistro-tar-install.sh -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node &
+          nohup ./opendistro-tar-install.sh -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node &
           
       - name: Run Curl Commands
         run: |
-          cd /home/runner/work/opendistro-build/odfe-test/
-          ls -ltr
-          #echo "Sleeping"
-          #sleep 1m
-          #curl -XGET https://localhost:9200 -u admin:admin --insecure
+          cd /home/runner/work/opendistro-build/odfe-test/odfe-test
+          sudo pip3 install pytest
+          sudo pip3 install requests
+          pytest
+          
           
      
         
