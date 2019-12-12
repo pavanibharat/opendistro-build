@@ -41,10 +41,11 @@ jobs:
           ls -ltr
           
           ./opendistro-tar-install.sh -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node
-
-          sleep 30
-          sudo cat /var/log/elasticsearch/elasticsearch.log
           
+      - name: Run Curl Commands
+        run: |
+          echo "Sleeping"
+          sleep 10
           curl -XGET https://localhost:9200 -u admin:admin --insecure
           
      
