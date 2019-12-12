@@ -29,6 +29,7 @@ jobs:
           aws-region: us-east-1
       - name: Run Tar
         run: |
+          echo `pwd`
           #sudo add-apt-repository ppa:openjdk-r/ppa
           #sudo apt update -y
           #sudo apt install openjdk-11-jdk
@@ -49,7 +50,7 @@ jobs:
           
       - name: Run Curl Commands
         run: |
-          cd $home
+          cd $home/runner
           ls -ltr
           #echo "Sleeping"
           #sleep 1m
