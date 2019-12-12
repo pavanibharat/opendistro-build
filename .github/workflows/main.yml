@@ -30,6 +30,8 @@ jobs:
       - name: Run Tar
         run: |
           echo `pwd`
+          sudo pip3 install pytest
+          sudo pip3 install requests
           #sudo add-apt-repository ppa:openjdk-r/ppa
           #sudo apt update -y
           #sudo apt install openjdk-11-jdk
@@ -46,16 +48,21 @@ jobs:
           cd opendistroforelasticsearch-$odfe_version
           ls -ltr
           
-          nohup ./opendistro-tar-install.sh -Ecluster.name=odfe-cluster -Enode.name=odfe-node1 -Ehttp.host=0.0.0.0 -Ediscovery.type=single-node &
-          
-      - name: Run Curl Commands
-        run: |
+          nohup ./opendistro-tar-install.sh &
           sleep 1m
-          sudo cat /var/log/elasticsearch/elasticsearch.log
+          curl -XGET https://localhost:9200 -u admin:admin --insecure
+
           cd /home/runner/work/opendistro-build/odfe-test/odfe-test
-          sudo pip3 install pytest
-          sudo pip3 install requests
           pytest
+          
+      #- name: Run Curl Commands
+        #run: |
+          #sleep 1m
+          #sudo cat /var/log/elasticsearch/elasticsearch.log
+          #cd /home/runner/work/opendistro-build/odfe-test/odfe-test
+          #sudo pip3 install pytest
+          #sudo pip3 install requests
+          #pytest
           
           
      
