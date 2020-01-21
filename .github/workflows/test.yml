@@ -9,11 +9,6 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-        with:
-          repository: opendistro-for-elasticsearch/alerting
-          ref: master
-          token: ${{ secrets.GitHub_PAT }}
       - name: Checkout Repo
         run: |
           ls -ltr
