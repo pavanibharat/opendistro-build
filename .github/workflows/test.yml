@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        run: |
-          git clone https://github.com/opendistro-for-elasticsearch/alerting.git
-          ls -ltr
+        uses: actions/checkout@v2
+        with:
+          repository: opendistro-for-elasticsearch/alerting
+        
       
