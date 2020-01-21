@@ -1,0 +1,13 @@
+name: Process Debian Artifacts
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  plugin-avilability:
+    name: Check Plugin Availability
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      
