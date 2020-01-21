@@ -13,8 +13,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: opendistro-for-elasticsearch/alerting
+          ref: s3-trigger
       - name: List Repo
         run: |
-          ls -ltr
+          git branch
         
       
