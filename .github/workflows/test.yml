@@ -42,16 +42,17 @@ jobs:
           ls -ltr
           tot_plugins=`ls|wc -l`
           echo $tot_plugins
-          echo "${#all_plugin[*]}"
+          echo "${#plugin_arr[*]}"
           
           if [ $tot_plugins == $CURRENT_NO_PLUGINS ]
           then
               echo "All plugins available"
           else
               curr_plugins=`ls`
+              echo $curr_plugins
               for plgin in ${plugin_arr[*]}
               do
-                if echo $curr_plugin|grep -q $plgin
+                if echo $curr_plugins|grep -q $plgin
                 then
                     echo "$plgin exists"
                 else
