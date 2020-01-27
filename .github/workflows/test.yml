@@ -20,5 +20,19 @@ jobs:
           echo "This is a test message" > /home/runner/work/opendistro-build/test_message.txt
           
           cat /home/runner/work/opendistro-build/test_message.txt
+      - name: Send mail
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Github Actions job result
+          # Read file contents as body:
+          body: /home/runner/work/opendistro-build/test_message.txt
+          to: sngri@amazon.com
+          from: Luke Skywalker
+          # Optional content type:
+          content_type: text/html
         
       
