@@ -62,10 +62,19 @@ jobs:
               done
           fi
           
+          cd /home/runner/work/opendistro-build/opendistro-build/
+          ls -ltr
           if [ ${#unavailable_plugin[*]} > 0 ]
           then
-              echo ${unavailable_plugin[*]}
+              echo "<h2>Below plugins are not yet available for ODFE-$OD_VERSION</h2>" >> message.md
+              echo "<ol>" >> message.md
+              for item in ${unavailable_plugin[*]}
+              do
+                echo "<li>$item</li>" >> message.md
+              done
+              echo "</ol>" >> message.md
           fi
+          ls -ltr
       - name: Send mail
         uses: dawidd6/action-send-mail@master
         with:
@@ -73,7 +82,7 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Github Actions job result
+          subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
           # Read file contents as body:
           body: Hello World!!
           to: sngri@amazon.com
