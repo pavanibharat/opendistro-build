@@ -29,7 +29,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions job result
           # Read file contents as body:
-          body: file:/home/runner/work/opendistro-build/test_message.txt
+          body: file://README.md
           to: sngri@amazon.com
           from: Opendistro Elasticsearch
           # Optional content type:
