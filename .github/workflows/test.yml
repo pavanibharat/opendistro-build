@@ -73,7 +73,7 @@ jobs:
               done
               echo "</ol>" >> message.md
           else
-              echo <h2> All plugins are available </h2> >> message.md
+              echo "<h2> All plugins are available </h2>" >> message.md
           fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
