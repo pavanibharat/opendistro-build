@@ -50,7 +50,7 @@ jobs:
               for plgin in $plugin_list
               do
                 chck_plugin=`echo $plgin|awk -F- '{print $1}'`
-                if [ $all_plugin =~ $chck_plugin ]
+                if echo $all_plugin|grep -q $chck_plugin
                 then
                     echo "$chck_plugin exists"
                 else
