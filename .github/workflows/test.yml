@@ -31,7 +31,7 @@ jobs:
           # Read file contents as body:
           body: /home/runner/work/opendistro-build/test_message.txt
           to: sngri@amazon.com
-          from: Rishabh Singh
+          from: Opendistro Elasticsearch
           # Optional content type:
           content_type: text/html
         
