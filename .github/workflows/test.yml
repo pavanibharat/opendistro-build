@@ -63,7 +63,6 @@ jobs:
           fi
           
           cd /home/runner/work/opendistro-build/opendistro-build/
-          ls -ltr
           if [ ${#unavailable_plugin[*]} > 0 ]
           then
               echo "<h2>Below plugins are not yet available for ODFE-$OD_VERSION</h2>" >> message.md
@@ -73,8 +72,9 @@ jobs:
                 echo "<li>$item</li>" >> message.md
               done
               echo "</ol>" >> message.md
+          else
+              echo <h2> All plugins are available </h2> >> message.md
           fi
-          ls -ltr
       - name: Send mail
         uses: dawidd6/action-send-mail@master
         with:
@@ -89,5 +89,6 @@ jobs:
           from: Opendistro Elasticsearch
           # Optional content type:
           content_type: text/html
+          
         
       
