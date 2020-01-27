@@ -16,6 +16,7 @@ jobs:
           ref: opendistro-1.4
       - name: List Repo
         run: |
+          echo `pwd`
           git branch
         
       
