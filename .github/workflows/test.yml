@@ -9,15 +9,46 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          repository: opendistro-for-elasticsearch/alerting
-          ref: opendistro-1.4
-      - name: List Repo
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Checking Availability
         run: |
-          echo `pwd`
-          echo "This is a test message" > message.md
+          #!/bin/bash
+          CURRENT_NO_PLUGINS=6
+          PLUGINS="opendistro-sql/opendistro_sql opendistro-alerting/opendistro_alerting opendistro-job-scheduler/opendistro-job-scheduler opendistro-security/opendistro_security performance-analyzer/opendistro_performance_analyzer opendistro-index-management/opendistro_index_management"
+          
+          cd elasticsearch/bin
+          ls -ltr
+          OD_VERSION=`./version-info --od`
+          echo "$OD_VERSION"
+          cd /home/runner/work/opendistro-build
+          mkdir plugins
+          ls -ltr
+          cd plugins
+          
+          for item in $PLUGINS
+          do
+            plugin_folder=`echo $item|awk -F/ '{print $1}'`
+            plguin_item=`echo $item|awk -F/ '{print $2}'`
+            echo $plugin_folder.$plguin_item
+            plugin_list+=*$plguin_item
+            aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/elasticsearch-plugins/$plugin_folder/ . --recursive --exclude "*" --include "$plguin_item-$OD_VERSION*"
+          done
+          ls -ltr
+          tot_plugins=`ls|wc -l`
+          echo $tot_plugins
+          
+          if [ $tot_plugins == $CURRENT_NO_PLUGINS ]
+          then
+              echo "All plugins available"
+          else
+              echo $plugin_list
+          fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
         with:
@@ -27,7 +58,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Github Actions job result
           # Read file contents as body:
-          body: file://message.md
+          body: Hello World!!
           to: sngri@amazon.com
           from: Opendistro Elasticsearch
           # Optional content type:
