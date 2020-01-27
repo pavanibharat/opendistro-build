@@ -49,7 +49,7 @@ jobs:
               plugin_list=`ls`
               for plgin in $plugin_list
               do
-                chck_plugin=`echo $plgin|awk -F- {print $1}`
+                chck_plugin=`echo $plgin|awk -F- '{print $1}'`
                 if [ $all_plugin =~ $chck_plugin ]
                 then
                     echo "$chck_plugin exists"
