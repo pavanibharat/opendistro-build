@@ -3,7 +3,7 @@ name: Process Debian Artifacts
 on:
   push:
     branches:
-      - master
+      - s3-trigger
 jobs:
   plugin-avilability:
     name: Check Plugin Availability
@@ -20,6 +20,8 @@ jobs:
         run: |
           #!/bin/bash
           CURRENT_NO_PLUGINS=6
+          plugin_arr=()
+          unavailable_plugin=()
           PLUGINS="opendistro-sql/opendistro_sql opendistro-alerting/opendistro_alerting opendistro-job-scheduler/opendistro-job-scheduler opendistro-security/opendistro_security performance-analyzer/opendistro_performance_analyzer opendistro-index-management/opendistro_index_management"
           
           cd elasticsearch/bin
@@ -35,19 +37,58 @@ jobs:
           do
             plugin_folder=`echo $item|awk -F/ '{print $1}'`
             plguin_item=`echo $item|awk -F/ '{print $2}'`
-            echo $plugin_folder.$plguin_item
+            plugin_arr+=( $plguin_item )
             aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/elasticsearch-plugins/$plugin_folder/ . --recursive --exclude "*" --include "$plguin_item-$OD_VERSION*"
           done
           ls -ltr
           tot_plugins=`ls|wc -l`
           echo $tot_plugins
+          echo "${#plugin_arr[*]}"
           
           if [ $tot_plugins == $CURRENT_NO_PLUGINS ]
           then
               echo "All plugins available"
           else
-              exit 1
+              curr_plugins=`ls`
+              echo $curr_plugins
+              for plgin in ${plugin_arr[*]}
+              do
+                if echo $curr_plugins|grep -q $plgin
+                then
+                    echo "$plgin exists"
+                else
+                    unavailable_plugin+=( $plgin )
+                fi
+              done
           fi
+          
+          cd /home/runner/work/opendistro-build/opendistro-build/
+          if [ ${#unavailable_plugin[*]} > 0 ]
+          then
+              echo "<h2>Below plugins are not yet available for ODFE-$OD_VERSION</h2>" >> message.md
+              echo "<ol>" >> message.md
+              for item in ${unavailable_plugin[*]}
+              do
+                echo "<li>$item</li>" >> message.md
+              done
+              echo "</ol>" >> message.md
+          else
+              echo "<h2> All plugins are available </h2>" >> message.md
+          fi
+      - name: Send mail
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
+          # Read file contents as body:
+          body: file://message.md
+          to: sngri@amazon.com
+          from: Opendistro Elasticsearch
+          # Optional content type:
+          content_type: text/html
   build-es-artifacts:
     needs: [plugin-avilability]
     name: Build ES Artifacts
@@ -97,11 +138,11 @@ jobs:
         run: |
           #!/bin/bash -x
           cd kibana/linux_distributions
-          sh generate-pkg.sh
-          deb_artifact=`ls target/*.deb`
-          ls -ltr target/
-          tar_checksum_artifact=`ls target/*.tar.gz.sha512`
-          aws s3 cp $deb_artifact s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs/opendistroforelasticsearch-kibana/
+          #sh generate-pkg.sh
+          #deb_artifact=`ls target/*.deb`
+          #ls -ltr target/
+          #tar_checksum_artifact=`ls target/*.tar.gz.sha512`
+          #aws s3 cp $deb_artifact s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/debs/opendistroforelasticsearch-kibana/
 
   sign-deb-artifacts:
     needs: [build-es-artifacts, build-kibana-artifacts]
@@ -154,10 +195,7 @@ jobs:
 
           aws s3 sync ~/.aptly/public/ s3://artifacts.opendistroforelasticsearch.amazon.com/staging/apt
           
-          aws s3 sync ~/.aptly/public/ s3://artifacts.opendistroforelasticsearch.amazon.com/apt
-
           aws cloudfront create-invalidation --distribution-id E1VG5HMIWI4SA2 --paths "/staging/apt/*"
-          aws cloudfront create-invalidation --distribution-id E1VG5HMIWI4SA2 --paths "/apt/*"
 
   test-deb-artifacts:
     needs: [sign-deb-artifacts]
@@ -181,8 +219,8 @@ jobs:
           wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
           echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a /etc/apt/sources.list.d/opendistroforelasticsearch.list
 
-          wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.3.2-amd64.deb
-          sudo dpkg -i elasticsearch-oss-7.3.2-amd64.deb
+          wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.4.2-amd64.deb
+          sudo dpkg -i elasticsearch-oss-7.4.2-amd64.deb
 
           sudo apt-get -y update
           sudo apt install -y opendistroforelasticsearch
@@ -193,16 +231,10 @@ jobs:
           sudo ls -ltr /var/log/elasticsearch/
           sudo cat /var/log/elasticsearch/elasticsearch.log
           sudo netstat -natp
-
-      - name: Run ES Tests
-        run: |
-          cd ..
-          cd odfe-test
-          ls -ltr
-          cd odfe-test
-          sudo pip3 install pytest
-          sudo pip3 install requests
-          pytest
+          
+          curl -XGET https://localhost:9200 -u admin:admin --insecure
+          
+          curl -XGET https://localhost:9200/_cat/plugins?v -u admin:admin --insecure
 
   test-alerting-artifacts:
     needs: [sign-deb-artifacts]
