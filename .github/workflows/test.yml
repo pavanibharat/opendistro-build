@@ -35,8 +35,6 @@ jobs:
           do
             plugin_folder=`echo $item|awk -F/ '{print $1}'`
             plguin_item=`echo $item|awk -F/ '{print $2}'`
-            echo $plugin_folder.$plguin_item
-            plugin_list+=*$plguin_item
             aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/elasticsearch-plugins/$plugin_folder/ . --recursive --exclude "*" --include "$plguin_item-$OD_VERSION*"
           done
           ls -ltr
@@ -47,6 +45,7 @@ jobs:
           then
               echo "All plugins available"
           else
+              plugin_list=`ls`
               echo $plugin_list
           fi
       - name: Send mail
