@@ -18,8 +18,6 @@ jobs:
         run: |
           echo `pwd`
           echo "This is a test message" > message.md
-          
-          cat /home/runner/work/opendistro-build/test_message.txt
       - name: Send mail
         uses: dawidd6/action-send-mail@master
         with:
