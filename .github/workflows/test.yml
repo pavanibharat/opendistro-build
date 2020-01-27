@@ -21,6 +21,7 @@ jobs:
           #!/bin/bash
           CURRENT_NO_PLUGINS=6
           plugin_arr=()
+          unavailable_plugin=()
           PLUGINS="opendistro-sql/opendistro_sql opendistro-alerting/opendistro_alerting opendistro-job-scheduler/opendistro-job-scheduler opendistro-security/opendistro_security performance-analyzer/opendistro_performance_analyzer opendistro-index-management/opendistro_index_management"
           
           cd elasticsearch/bin
@@ -56,9 +57,14 @@ jobs:
                 then
                     echo "$plgin exists"
                 else
-                    echo "$plgin does not exist"
+                    unavailable_plugin+=( $plgin )
                 fi
               done
+          fi
+          
+          if [ ${#unavailable_plugin[*]} > 0 ]
+          then
+              echo ${plugin_arr[*]}
           fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
