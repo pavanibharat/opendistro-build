@@ -35,7 +35,8 @@ jobs:
           do
             plugin_folder=`echo $item|awk -F/ '{print $1}'`
             plguin_item=`echo $item|awk -F/ '{print $2}'`
-            aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/elasticsearch-plugins/$plugin_folder/ . --recursive --exclude "*" --include "$plguin_item-$OD_VERSION*"
+            all_plugin+=$plguin_item**
+            #aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/elasticsearch-plugins/$plugin_folder/ . --recursive --exclude "*" --include "$plguin_item-$OD_VERSION*"
           done
           ls -ltr
           tot_plugins=`ls|wc -l`
@@ -46,7 +47,15 @@ jobs:
               echo "All plugins available"
           else
               plugin_list=`ls`
-              echo $plugin_list
+              for plgin in $plugin_list
+              do
+                chck_plugin=`echo $plgin|awk -F- {print $1}`
+                if [ $all_plugin =~ $chck_plugin ]
+                then
+                    echo "$chck_plugin exists"
+                else
+                    echo "$chck_plugin does not exist"
+                fi
           fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
