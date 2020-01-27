@@ -64,7 +64,7 @@ jobs:
           
           if [ ${#unavailable_plugin[*]} > 0 ]
           then
-              echo ${plugin_arr[*]}
+              echo ${unavailable_plugin[*]}
           fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
