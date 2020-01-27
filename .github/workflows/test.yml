@@ -56,6 +56,7 @@ jobs:
                 else
                     echo "$chck_plugin does not exist"
                 fi
+              done
           fi
       - name: Send mail
         uses: dawidd6/action-send-mail@master
