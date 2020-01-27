@@ -17,6 +17,8 @@ jobs:
       - name: List Repo
         run: |
           echo `pwd`
-          git branch
+          echo "This is a test message" > /home/runner/work/opendistro-build/test_message.txt
+          
+          cat /home/runner/work/opendistro-build/test_message.txt
         
       
