@@ -84,7 +84,7 @@ jobs:
           password: ${{secrets.MAIL_PASSWORD}}
           subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
           # Read file contents as body:
-          body: Hello World!!
+          body: file://message.md
           to: sngri@amazon.com
           from: Opendistro Elasticsearch
           # Optional content type:
