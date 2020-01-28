@@ -18,9 +18,7 @@ jobs:
           echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:1.3.0" >> Dockerfile
           echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
           docker build -t odfe-http:1.3.0 .
-          docker images
-          #docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/opendistroforelasticsearch:1.3.0
-          #java -version
+          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:1.3.0
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
@@ -32,8 +30,8 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: RUN ES Tests
         run: |
-          #sleep 45
-          #curl -XGET https://localhost:9200 -u admin:admin --insecure
-          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          sleep 45
+          curl -XGET https://localhost:9200 -u admin:admin --insecure
+          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
 
           
