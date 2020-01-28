@@ -56,8 +56,10 @@ jobs:
           #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
           #echo "trying again"
           #sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
-          sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
-          sudo tail -25 /etc/elasticsearch/elasticsearch.yml
+          #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
+          echo "****************************************************"
+          sudo cat /etc/elasticsearch/elasticsearch.yml
+          echo "****************************************************"
           #sudo echo "opendistro_security.ssl.http.enabled: false" >> /etc/elasticsearch/elasticsearch.yml
 
           #sudo /etc/init.d/elasticsearch start
