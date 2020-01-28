@@ -6,10 +6,10 @@ on:
       - s3-trigger
 jobs:
   plugin-avilability:
+    name: Check Plugin Availability
     strategy:
       matrix:
         java: [12]
-    name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
       - name: RUN ES Docker
