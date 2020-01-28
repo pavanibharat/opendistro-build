@@ -52,9 +52,10 @@ jobs:
           sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
           sudo ls -ltr /usr/share/elasticsearch/plugins/
 
-          #sudo /etc/init.d/elasticsearch start
+          sudo /etc/init.d/elasticsearch start
 
-          #sleep 30
+          sleep 30
+          sudo cat /var/log/elasticsearch/elasticsearch.log
           
           #curl -XGET https://localhost:9200 -u admin:admin --insecure
 
