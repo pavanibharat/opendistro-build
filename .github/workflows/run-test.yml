@@ -9,10 +9,17 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Tags
+      - name: RUN ES Docker
         run: |
-          git clone https://github.com/opendistro-for-elasticsearch/index-management.git
-          cd index-management
-          git checkout tags/v1.3.0.1
+          echo "Running Docker"
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          repository: opendistro-for-elasticsearch/index-management
+          ref: odfe-1.3.0.1
+      - name: RUN ES Tests
+        run: |
+          git branch
+          ls -ltr
 
           
