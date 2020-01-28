@@ -12,8 +12,9 @@ jobs:
       - name: RUN ES Docker
         run: |
           echo "Running Docker"
-          docker pull opendistroforelasticsearch/opendistroforelasticsearch:1.3.0
-          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/opendistroforelasticsearch:1.3.0
+          #docker pull opendistroforelasticsearch/opendistroforelasticsearch:1.3.0
+          #docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opendistroforelasticsearch/opendistroforelasticsearch:1.3.0
+          java -version
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
@@ -21,8 +22,8 @@ jobs:
           ref: odfe-1.3.0.1
       - name: RUN ES Tests
         run: |
-          sleep 45
-          curl -XGET https://localhost:9200 -u admin:admin --insecure
-          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          #sleep 45
+          #curl -XGET https://localhost:9200 -u admin:admin --insecure
+          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
 
           
