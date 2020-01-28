@@ -23,5 +23,5 @@ jobs:
           repository: opendistro-for-elasticsearch/index-management
       - name: Run ES Tests
         run: |
-          git branch
+          git checkout tags/v1.3.0.1
           
