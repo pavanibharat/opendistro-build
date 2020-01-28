@@ -33,6 +33,12 @@ jobs:
           #sleep 45
           #curl http://localhost:9200
           #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - name: Run Tests on Debian
         run: |
           sudo add-apt-repository -y ppa:openjdk-r/ppa
@@ -52,14 +58,12 @@ jobs:
           sudo ls -ltr /etc/elasticsearch/
           sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
           sudo ls -ltr /etc/elasticsearch/
+          aws s3 cp /etc/elasticsearch/elasticsearch.yml opendistro-docs/github-actions/
           #sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
           #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
           #echo "trying again"
           #sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
           #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
-          echo "****************************************************"
-          sudo cat /etc/elasticsearch/elasticsearch.yml
-          echo "****************************************************"
           #sudo echo "opendistro_security.ssl.http.enabled: false" >> /etc/elasticsearch/elasticsearch.yml
 
           #sudo /etc/init.d/elasticsearch start
