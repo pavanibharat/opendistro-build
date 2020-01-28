@@ -9,4 +9,10 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          repository: opendistro-for-elasticsearch/index-management
+          ref: opendistro-1.4
+      - name: Run ISM Tests
+        run: |
+          ls -ltr
