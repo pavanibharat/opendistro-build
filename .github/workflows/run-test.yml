@@ -23,6 +23,6 @@ jobs:
         run: |
           sleep 45
           curl -XGET https://localhost:9200 -u admin:admin --insecure
-          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
 
           
