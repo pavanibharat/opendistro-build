@@ -70,6 +70,6 @@ jobs:
           sleep 30
           #sudo cat /var/log/elasticsearch/elasticsearch.log
           
-          curl https://localhost:9200
+          curl http://localhost:9200
 
           
