@@ -1,0 +1,12 @@
+name: Run ES Tests
+
+on:
+  push:
+    branches:
+      - actions-branch
+jobs:
+  plugin-avilability:
+    name: Check Plugin Availability
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
