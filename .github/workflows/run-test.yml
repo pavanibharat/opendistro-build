@@ -8,7 +8,7 @@ jobs:
   plugin-avilability:
     strategy:
       matrix:
-        ava: [12]
+        java: [12]
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
