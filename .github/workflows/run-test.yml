@@ -48,10 +48,10 @@ jobs:
 
           sudo apt-get -y update
           sudo apt install -y opendistroforelasticsearch
-          sudo ls -ltr /usr/share/elasticsearch/plugins/
-          sudo ls -ltr /etc/elasticsearch/
+
           sudo ls -ltr /etc/elasticsearch/
           sudo chmod 755 /etc/elasticsearch/elasticsearch.yml
+          sudo ls -ltr /etc/elasticsearch/
           #sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
           #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
           #echo "trying again"
