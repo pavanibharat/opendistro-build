@@ -3,7 +3,7 @@ name: Process Debian Artifacts
 on:
   push:
     branches:
-      - s3-trigger
+      - actions-branch
 jobs:
   plugin-avilability:
     name: Check Plugin Availability
