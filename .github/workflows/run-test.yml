@@ -6,6 +6,9 @@ on:
       - s3-trigger
 jobs:
   plugin-avilability:
+    strategy:
+      matrix:
+        ava: [12]
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
