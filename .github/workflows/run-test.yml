@@ -3,7 +3,7 @@ name: Run ES Tests
 on:
   push:
     branches:
-      - actions-branch
+      - s3-trigger
 jobs:
   plugin-avilability:
     name: Check Plugin Availability
