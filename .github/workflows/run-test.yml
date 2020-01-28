@@ -15,10 +15,10 @@ jobs:
       - name: RUN ES Docker
         run: |
           echo "Running Docker"
-          echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:1.3.0" >> Dockerfile
-          echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
-          docker build -t odfe-http:1.3.0 .
-          docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:1.3.0
+          #echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:1.3.0" >> Dockerfile
+          #echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
+          #docker build -t odfe-http:1.3.0 .
+          #docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:1.3.0
       - name: Checkout Repo
         uses: actions/checkout@v2
         with:
@@ -30,8 +30,29 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: RUN ES Tests
         run: |
-          sleep 45
-          curl http://localhost:9200
-          ./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          #sleep 45
+          #curl http://localhost:9200
+          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+      - name: Run Tests on Debian
+        run: |
+          sudo add-apt-repository -y ppa:openjdk-r/ppa
+          sudo apt update -y
+          sudo apt install -y openjdk-11-jdk
+          sudo sudo apt install -y net-tools
+
+          wget -qO - https://d3g5vo6xdbdb9a.cloudfront.net/GPG-KEY-opendistroforelasticsearch | sudo apt-key add -
+          echo "deb https://d3g5vo6xdbdb9a.cloudfront.net/apt stable main" | sudo tee -a /etc/apt/sources.list.d/opendistroforelasticsearch.list
+
+          wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-7.3.2-amd64.deb
+          sudo dpkg -i elasticsearch-oss-7.3.2-amd64.deb
+
+          sudo apt-get -y update
+          sudo apt install -y opendistroforelasticsearch
+
+          sudo /etc/init.d/elasticsearch start
+
+          sleep 30
+          
+          curl -XGET https://localhost:9200 -u admin:admin --insecure
 
           
