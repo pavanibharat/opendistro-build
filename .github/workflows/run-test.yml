@@ -9,9 +9,9 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: opendistro-for-elasticsearch/index-management
-      - run: git checkout tags/v1.3.0.1
+      - name: Checkout Tags
+        run: |
+          git clone https://github.com/opendistro-for-elasticsearch/index-management.git
+          git checkout tags/v1.3.0.1
 
           
