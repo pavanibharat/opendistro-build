@@ -58,11 +58,11 @@ jobs:
           sudo apt install -y opendistroforelasticsearch
 
           sudo ls -ltr /etc/elasticsearch/
-          sudo chmod 777 /etc/elasticsearch/*
+          sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
           sudo ls -ltr /etc/elasticsearch/
-          aws s3 cp /etc/elasticsearch/elasticsearch.yml s3://opendistro-docs/github-actions/
           #sudo /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security
-          #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
+          sudo sed -i /^opendistro_security/d /etc/elasticsearch/elasticsearch.yml
+          sudo tail -10 /etc/elasticsearch/elasticsearch.yml
           #echo "trying again"
           #sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
           #sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
