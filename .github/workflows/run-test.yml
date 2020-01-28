@@ -57,12 +57,13 @@ jobs:
           #echo "trying again"
           #sudo chmod 777 /etc/elasticsearch/elasticsearch.yml
           sudo sed -i /opendistro_security.ssl.http.enabled/d /etc/elasticsearch/elasticsearch.yml
-          sudo echo "opendistro_security.ssl.http.enabled: false" >> /etc/elasticsearch/elasticsearch.yml
+          sudo tail -25 /etc/elasticsearch/elasticsearch.yml
+          #sudo echo "opendistro_security.ssl.http.enabled: false" >> /etc/elasticsearch/elasticsearch.yml
 
-          sudo /etc/init.d/elasticsearch start
+          #sudo /etc/init.d/elasticsearch start
 
-          sleep 30
-          sudo cat /var/log/elasticsearch/elasticsearch.log
+          #sleep 30
+          #sudo cat /var/log/elasticsearch/elasticsearch.log
           
           #curl -XGET https://localhost:9200 -u admin:admin --insecure
 
