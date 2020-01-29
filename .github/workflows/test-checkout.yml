@@ -9,6 +9,7 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - name: Checkout ISM
         uses: actions/checkout@v1
         with:
