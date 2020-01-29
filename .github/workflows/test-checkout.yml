@@ -17,7 +17,11 @@ jobs:
       - name: Run Something
         run: |
           echo `pwd`
+          cd ..
+          ls -ltr
+          cd opendistro-build
           ls -ltr
           cd ..
+          cd index-management
           ls -ltr
       
