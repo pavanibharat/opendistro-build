@@ -9,12 +9,13 @@ jobs:
     name: Check Plugin Availability
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
       - name: Checkout ISM
         uses: actions/checkout@v2
         with:
           repository: opendistro-for-elasticsearch/index-management
           ref: opendistro-1.4
+      - name: Checkout This
+        uses: actions/checkout@v2
       - name: Run Something
         run: |
           echo `pwd`
