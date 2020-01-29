@@ -39,6 +39,6 @@ jobs:
           cd ../../..
           aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.3.0.tar.gz .
           tar -zxf opendistroforelasticsearch-1.3.0.tar.gz
-          opendistroforelasticsearch-1.3.0
+          cd opendistroforelasticsearch-1.3.0
           ls -ltr
       
