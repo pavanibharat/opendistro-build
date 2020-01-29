@@ -10,16 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ISM
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
         with:
           repository: opendistro-for-elasticsearch/index-management
           ref: opendistro-1.4
-      - name: Checkout This
-        uses: actions/checkout@v2
       - name: Run Something
         run: |
           echo `pwd`
           ls -ltr
-          cd ../..
+          cd ..
           ls -ltr
       
