@@ -22,6 +22,6 @@ jobs:
           ls -ltr
           cd opendistro-build/elasticsearch/linux_distributions
           ls -ltr
-          
-          
+          odfe_version=`../bin/version-info --od`
+          echo $odfe_version
       
