@@ -3,7 +3,7 @@ name: Process Debian Artifacts
 on:
   push:
     branches:
-      - actions-branch
+      - s3-trigger
 jobs:
   plugin-avilability:
     name: Check Plugin Availability
@@ -85,7 +85,7 @@ jobs:
           subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
           # Read file contents as body:
           body: file://message.md
-          to: sngri@amazon.com
+          to: sngri@amazon.com,srivasri@amazon.com
           from: Opendistro Elasticsearch
           # Optional content type:
           content_type: text/html
