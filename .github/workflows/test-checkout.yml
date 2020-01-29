@@ -41,11 +41,14 @@ jobs:
           tar -zxf opendistroforelasticsearch-1.3.0.tar.gz
           cd opendistroforelasticsearch-1.3.0
           sed -i /install_demo_configuration/d opendistro-tar-install.sh
-          /bin/elasticsearch-plugin remove opendistro_security
+          cd bin
+          ls -ltr
+          cd ../plugins
+          ls -ltr
           
-          nohup ./opendistro-tar-install.sh &
-          sleep 45
-          curl http://localhost:9200
+          #nohup ./opendistro-tar-install.sh &
+          #sleep 45
+          #curl http://localhost:9200
           
           
       
