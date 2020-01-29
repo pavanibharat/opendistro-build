@@ -20,9 +20,8 @@ jobs:
           echo `pwd`
           cd ..
           ls -ltr
-          cd opendistro-build
+          cd opendistro-build/elasticsearch/linux_distributions
           ls -ltr
-          cd ..
-          cd index-management
-          ls -ltr
+          
+          
       
