@@ -46,7 +46,7 @@ jobs:
           #nohup ./opendistro-tar-install.sh &
           #sleep 45
           #curl http://localhost:9200
-          cd ..
+          cd ../index-management
           ls -ltr
           
           
