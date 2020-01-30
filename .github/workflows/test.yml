@@ -67,7 +67,7 @@ jobs:
               echo "<ol>" >> message.md
               for item in ${unavailable_plugin[*]}
               do
-                echo "<li>$item</li>" >> message.md
+                echo "<li><b>$item</b></li>" >> message.md
               done
               echo "</ol>" >> message.md
               echo "<br><br>" >> message.md
@@ -79,7 +79,7 @@ jobs:
               echo "<ol>" >> message.md
               for item in ${available_plugin[*]}
               do
-                echo "<li>$item</li>" >> message.md
+                echo "<li><b>$item</b></li>" >> message.md
               done
               echo "</ol>" >> message.md
               echo "<br><br>" >> message.md
