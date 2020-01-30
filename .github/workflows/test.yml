@@ -66,21 +66,27 @@ jobs:
           
           if [ ${#unavailable_plugin[*]} -gt 0 ]
           then
-            echo "It is not there"
+              echo "<h2>Below plugins are not available for ODFE-$OD_VERSION build</h2>" >> message.md
+              echo "<ol>" >> message.md
+              for item in ${unavailable_plugin[*]}
+              do
+                echo "<li>$item</li>" >> message.md
+              done
+              echo "</ol>" >> message.md
           else
-              echo "It is there"
+              echo "<h2> All plugins are available </h2>" >> message.md
           fi
-      #- name: Send mail
-      #  uses: dawidd6/action-send-mail@master
-      #  with:
-      #    server_address: smtp.gmail.com
-      #    server_port: 465
-      #    username: ${{secrets.MAIL_USERNAME}}
-      #    password: ${{secrets.MAIL_PASSWORD}}
-      #    subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
-      #    # Read file contents as body:
-      #    body: file://message.md
-      #    to: sngri@amazon.com
-      #    from: Opendistro Elasticsearch
-      #    # Optional content type:
-      #    content_type: text/html
+      - name: Send mail
+        uses: dawidd6/action-send-mail@master
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
+          # Read file contents as body:
+          body: file://message.md
+          to: sngri@amazon.com
+          from: Opendistro Elasticsearch
+          # Optional content type:
+          content_type: text/html
