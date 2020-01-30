@@ -1,53 +1,39 @@
-name: Process Debian Artifacts
+name: What the F is this
 
 on:
   push:
     branches:
       - s3-trigger
 jobs:
-  plugin-avilability:
-    name: Check Plugin Availability
-    runs-on: ubuntu-latest
+  Test-ISM-Plugin:
+    name: Test ES Docker Container
+    runs-on: [ubuntu-16.04]
     strategy:
       matrix:
         java: [12]
     steps:
-      - name: Set up AWS Cred
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: actions/checkout@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Setup Java
+          repository: opendistro-for-elasticsearch/index-management
+          ref: master
+      - name: Set Up JDK ${{ matrix.java }}
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-      - uses: actions/checkout@v1
-      - name: Checkout ISM
-        uses: actions/checkout@v1
-        with:
-          repository: opendistro-for-elasticsearch/index-management
-          ref: opendistro-1.3
-      - name: Run Something
+      - name: Run Docker Container
         run: |
-          echo `pwd`
-          java -version
-          cd ..
-          cd opendistro-build/elasticsearch/linux_distributions
-          odfe_version=`../bin/version-info --od`
-          echo $odfe_version
-          cd ../../..
-          aws s3 cp s3://artifacts.opendistroforelasticsearch.amazon.com/downloads/tarball/opendistro-elasticsearch/opendistroforelasticsearch-1.3.0.tar.gz .
-          tar -zxf opendistroforelasticsearch-1.3.0.tar.gz
-          cd opendistroforelasticsearch-1.3.0
-          #sed -i /install_demo_configuration/d opendistro-tar-install.sh
-          #./bin/elasticsearch-plugin remove opendistro_security
-          
-          #nohup ./opendistro-tar-install.sh &
-          #sleep 45
-          #curl http://localhost:9200
-          cd ../index-management
+          sleep 10
           ls -ltr
+          cd ..
+          #echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:1.3.0" >> Dockerfile
+          #echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
+          
+          #docker build -t odfe-http:no-security .
+          #docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:no-security
+          
+          #sleep 45
+          cd index-management
+          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
           
           
       
