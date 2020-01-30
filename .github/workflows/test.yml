@@ -1,9 +1,9 @@
-name: Process Debian Artifacts
+name: Check Plugin Availability
 
 on:
   push:
-    branches:
-      - actions-branch
+    branches: 
+      - s3-trigger
 jobs:
   plugin-avilability:
     name: Check Plugin Availability
@@ -65,15 +65,13 @@ jobs:
           cd /home/runner/work/opendistro-build/opendistro-build/
           if [ ${#unavailable_plugin[*]} > 0 ]
           then
-              echo "<h2>Below plugins are not yet available for ODFE-$OD_VERSION</h2>" >> message.md
+              echo "<h2>Below plugins are not available for ODFE-$OD_VERSION build</h2>" >> message.md
               echo "<ol>" >> message.md
               for item in ${unavailable_plugin[*]}
               do
                 echo "<li>$item</li>" >> message.md
               done
               echo "</ol>" >> message.md
-              echo "<br><br>" >> message.md
-              echo "This is a system generated email" >> message.md
           else
               echo "<h2> All plugins are available </h2>" >> message.md
           fi
@@ -87,10 +85,7 @@ jobs:
           subject: Opendistro for Elasticsearch Build - Daily Run (Plugin Status)
           # Read file contents as body:
           body: file://message.md
-          to: niagrawa@amazon.com,sngri@amazon.com,kalaskar@amazon.com,kbalaji@amazon.com,srivasri@amazon.com,alolitas@amazon.com,jadhanir@amazon.com,samenp@amazon.com,bpavani@amazon.com
+          to: sngri@amazon.com
           from: Opendistro Elasticsearch
           # Optional content type:
           content_type: text/html
-          
-        
-      
