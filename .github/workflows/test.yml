@@ -61,8 +61,9 @@ jobs:
                 fi
               done
           fi
-          
+          echo "${#unavailable_plugin[*]}"
           cd /home/runner/work/opendistro-build/opendistro-build/
+          
           if [ ${#unavailable_plugin[*]} > 0 ]
           then
               echo "<h2>Below plugins are not available for ODFE-$OD_VERSION build</h2>" >> message.md
