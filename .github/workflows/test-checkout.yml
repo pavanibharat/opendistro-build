@@ -12,7 +12,7 @@ jobs:
       matrix:
         java: [12]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
         with:
           repository: opendistro-for-elasticsearch/index-management
           ref: master
@@ -22,18 +22,12 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: Run Docker Container
         run: |
-          sleep 10
           ls -ltr
+          echo "Next"
           cd ..
-          #echo "FROM opendistroforelasticsearch/opendistroforelasticsearch:1.3.0" >> Dockerfile
-          #echo "RUN /usr/share/elasticsearch/bin/elasticsearch-plugin remove opendistro_security" >> Dockerfile
-          
-          #docker build -t odfe-http:no-security .
-          #docker run -d -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" odfe-http:no-security
-          
-          #sleep 45
-          cd index-management
-          #./gradlew integTest -Dtests.rest.cluster=localhost:9200 -Dtests.cluster=localhost:9200
+          echo "skdhskalhdksla"
+          ls -ltr
+
           
           
       
