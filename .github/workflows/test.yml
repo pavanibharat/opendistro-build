@@ -64,7 +64,7 @@ jobs:
           echo "${#unavailable_plugin[*]}"
           cd /home/runner/work/opendistro-build/opendistro-build/
           
-          if [ ${#unavailable_plugin[*]} > 0 ]
+          if [ ${#unavailable_plugin[*]} -gt 0 ]
           then
             echo "It is not there"
           else
