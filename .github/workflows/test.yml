@@ -46,24 +46,19 @@ jobs:
           echo $tot_plugins
           echo "${#plugin_arr[*]}"
           
-          if [ $tot_plugins == $CURRENT_NO_PLUGINS ]
-          then
-              echo "All plugins available"
-          else
-              curr_plugins=`ls`
-              echo $curr_plugins
-              for plgin in ${plugin_arr[*]}
-              do
-                if echo $curr_plugins|grep -q $plgin
-                then
-                    available_plugin+=( $plgin )
-                    echo "$plgin exists"
-                else
-                    unavailable_plugin+=( $plgin )
-                fi
-              done
-          fi
-          echo "${#unavailable_plugin[*]}"
+          curr_plugins=`ls`
+          echo $curr_plugins
+          for plgin in ${plugin_arr[*]}
+            do
+              if echo $curr_plugins|grep -q $plgin
+              then
+                  available_plugin+=( $plgin )
+                  echo "$plgin exists"
+              else
+                  unavailable_plugin+=( $plgin )
+              fi
+            done
+
           cd /home/runner/work/opendistro-build/opendistro-build/
           
           echo "<h2>Below plugins are <b>not available</b> for ODFE-$OD_VERSION build</h2>" >> message.md
