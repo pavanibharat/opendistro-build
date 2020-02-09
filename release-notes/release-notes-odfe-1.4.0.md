@@ -27,7 +27,7 @@ All plugins are compatible with Elasticsearch 7.4.2 version
 ### **SQL**
 
 * Support function over aggregation result [#346](https://github.com/opendistro-for-elasticsearch/sql/pull/346), [#352](https://github.com/opendistro-for-elasticsearch/sql/pull/352), [#194](https://github.com/opendistro-for-elasticsearch/sql/issues/194), [#229](https://github.com/opendistro-for-elasticsearch/sql/issues/229), [#270](https://github.com/opendistro-for-elasticsearch/sql/issues/270), [#292](https://github.com/opendistro-for-elasticsearch/sql/issues/292)
-* Support conditional functions: IF, IFNULL, ISNULL [#273](https://github.com/opendistro-for-elasticsearch/sql/pull/273), #224 (https://github.com/opendistro-for-elasticsearch/sql/issues/224), [#235](https://github.com/opendistro-for-elasticsearch/sql/issues/235)
+* Support conditional functions: IF, IFNULL, ISNULL [#273](https://github.com/opendistro-for-elasticsearch/sql/pull/273), [#224](https://github.com/opendistro-for-elasticsearch/sql/issues/224), [#235](https://github.com/opendistro-for-elasticsearch/sql/issues/235)
 * Support JOIN without table alias [#274](https://github.com/opendistro-for-elasticsearch/sql/pull/274), [#232](https://github.com/opendistro-for-elasticsearch/sql/issues/232)
 * Support subquery in from with parent only has select [#278](https://github.com/opendistro-for-elasticsearch/sql/pull/278), [#230](https://github.com/opendistro-for-elasticsearch/sql/issues/230)
 * Support datetime functions: MONTH, DAYOFMONTH, DATE, MONTHNAME, TIMESTAMP, MAKETIME, NOW, CURDATE [#282](https://github.com/opendistro-for-elasticsearch/sql/pull/282), [#235](https://github.com/opendistro-for-elasticsearch/sql/issues/235)
@@ -67,7 +67,7 @@ All plugins are compatible with Elasticsearch 7.4.2 version
 * Fix issue that IP type cannot pass JDBC formatter [#275](https://github.com/opendistro-for-elasticsearch/sql/pull/275),  [#272](https://github.com/opendistro-for-elasticsearch/sql/issues/272)
 * Fixed flaky test suite, that was breaking Github action build [#284](https://github.com/opendistro-for-elasticsearch/sql/pull/284)
 * Corrected the selected field names displayed in the schema of JDBC formatted response [#295](https://github.com/opendistro-for-elasticsearch/sql/pull/295), [#290](https://github.com/opendistro-for-elasticsearch/sql/issues/290)
-* Fixed functions work improperly with fieldvalue/constant param for current use [#296](https://github.com/opendistro-for-elasticsearch/sql/pull/296), [#279](https://github.com/opendistro-for-elasticsearch/sql/issues/279), [#291] (https://github.com/opendistro-for-elasticsearch/sql/issues/291), [#224](https://github.com/opendistro-for-elasticsearch/sql/issues/224)
+* Fixed functions work improperly with fieldvalue/constant param for current use [#296](https://github.com/opendistro-for-elasticsearch/sql/pull/296), [#279](https://github.com/opendistro-for-elasticsearch/sql/issues/279), [#291](https://github.com/opendistro-for-elasticsearch/sql/issues/291), [#224](https://github.com/opendistro-for-elasticsearch/sql/issues/224)
 * Fixed issue of log10 function gets inaccurate results [#298](https://github.com/opendistro-for-elasticsearch/sql/pull/298),  [#297](https://github.com/opendistro-for-elasticsearch/sql/issues/297)
 * Fix the issue of column alias not working for GROUP BY [#307](https://github.com/opendistro-for-elasticsearch/sql/pull/307),  [#299](https://github.com/opendistro-for-elasticsearch/sql/issues/299)
 * Fixed the issue of substring not working correctly when fieldname is put as [#333](https://github.com/opendistro-for-elasticsearch/sql/pull/333), [#330](https://github.com/opendistro-for-elasticsearch/sql/issues/330)
@@ -81,9 +81,6 @@ All plugins are compatible with Elasticsearch 7.4.2 version
 
 ## TESTING
 
-### **ALERTING** 
-
-* Adds build and test github workflows to automate testing of each PR  [#30](https://github.com/opendistro-for-elasticsearch/job-scheduler/pull/30)
 
 ### **JOB SCHEDULER**
 
